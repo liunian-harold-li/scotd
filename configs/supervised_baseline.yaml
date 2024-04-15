@@ -1,0 +1,23 @@
+DATA:
+  TYPE: "cot"
+  BATCH_SIZE: 10
+  STEP_BY_STEP:
+    METHOD: 'few_shot_cot' #'few_shot_cot'
+  FEW_SHOT_COT_PROMPT: True
+
+MODEL:
+  TYPE: "empty_baseline"
+  NAME: "empty_baseline"
+  ADDITIONL_SUFFIX_STRING: "\n\n"
+
+
+POLICY_MODEL:
+  TYPE: "auto"
+  NAME: "facebook/opt-1.3b" #"facebook/opt-6.7b" # "facebook/opt-30b" 350m 2.7b 1.3b
+  LOAD_WITH_ACCELERATE: True
+  STOP_AT_NEW_LINE: True
+  LOAD_WITH_FP16: True
+  ACCELERATE_MAX_MEMORY: ( ("cpu", "50GB"), (0, "40GB"), (1, "40GB"), )
+
+TRAIN:
+  DATAPOOL_PATH: "data/pool_test.json"
